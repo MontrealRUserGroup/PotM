@@ -1,17 +1,26 @@
-PotM #1 : 
+PotM#1 : data.table
 ==================
-# data.table
-  
+
 March 25, 2014  
 
 ```{r}
 # install.packages('data.table')
 library(data.table)
 ```
-http://rpubs.com/vdimarco/datatable  
+[github.com/MontrealRUserGroup/PotM](http://bit.ly/mtlr-potm)
 
-data.frame: flexible & powerful
-=============
+Problem: R can be a bit... slow
+================
+```
+flexibility 
+
+vs. 
+
+performance
+```
+
+data.frame: the ultimate type
+================
 
 
 ```{r}
@@ -19,51 +28,53 @@ df.data <- data.frame(a=1:5,b=1:5)
 df.data
 ```
 
-data.table: faster, better, stronger
-=============
+Solution : the data.table
+==============
+```
+"contains pre-computed indexes for various columns to accelerate operations like data selection and merges"  
+
+- Wes McKinney
+```
+
+faster, better, stronger
+=============  
 
 ```{r}
-dt.data <- data.table(df.data)
+dt.data <- data.table(a=1:5,b=1:5)
 dt.data
 ```
 
-"contains pre-computed indexes for various columns to accelerate operations like data selection and merges" - Wes McKinney
+dt vs. df
+=====
 
-Who / What / When / Where / Why
+1. never has rownames
+  * may have one key of one or more columns
+  * key is used for row indexing instead of rownames
+2. enhanced functionality for ...
+  * fast joins of keyed tables
+  * fast aggregation
+  * fast last observation carried forward (LOCF)  
+  * fast columns add/modify/delete, with no copy
+
+Use Cases
+=========
+```
+> help(data.table)
+
+> The package can be used just for rapid programming (compact syntax). 
+> Largest compute time benefits are on 64bit platforms with plentiful RAM, or when smaller datasets are repeatedly queried within a loop, or when other methods use so much working memory that they fail with an out of memory error. 
+```
+
+Usage
 =======
-## Use Cases
-* time series
-* 
-
-```
-con(MySQL) -> dt.data
-```
-
-```{r}
-# Memory Management
-#
-
-```
-
-
-Key Concepts
-=============
 
 1. Define keys
 2. Fast grouping
 3. Fast time series join
 
-
-example
-=============
-
-
 ```{r}
-setkey(dt.data, a)
-
+dt <- data.table(df.data)
 ```
-
-
 
 summary
 =========
@@ -78,4 +89,11 @@ refs
 [1] [CRAN Intro Vignette](http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf)  
 [2] [Fast Summary Statistics by yhat](http://blog.yhathq.com/posts/fast-summary-statistics-with-data-dot-table.html)  
 [3] [r-forge](http://datatable.r-forge.r-project.org/)
+
+
+```{r, eval=FALSE}
+help(data.table)
+
+example(data.table) 
+```
 

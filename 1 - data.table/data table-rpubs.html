@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>PotM #1 data.table</title>
+  <title>PotM#1 : data.table</title>
     
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -749,79 +749,153 @@ hljs.initHighlightingOnLoad();
   <div class="slides">
 
 <section data-state="section" data-transition="linear" data-transition-speed="default">
-<h1>PotM #1 data.table</h1><p></p>
+<h1>PotM#1 : data.table</h1><p></p>
 
 <div class="slideContent" >
-<h2>March 2014</h2>
+<p>March 25, 2014  </p>
 
-<h3><a href="http://rpubs.com/vdimarco/datatable">http://rpubs.com/vdimarco/datatable</a></h3>
-
-</div>
-
-</section>
-<section data-transition="linear" data-transition-speed="default">
-<h3>install.packages('data.table')</h3>
-<div class="slideContent" >
-<pre><code class="r">library(data.table)
+<pre><code class="r"># install.packages(&#39;data.table&#39;)
+library(data.table)
 </code></pre>
 
-<h2><a href="http://datatable.r-forge.r-project.org/">http://datatable.r-forge.r-project.org/</a></h2>
+<p><a href="http://bit.ly/mtlr-potm">github.com/MontrealRUserGroup/PotM</a></p>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Features</h3>
+<h3>Problem: R can be a bit... slow</h3>
+<div class="slideContent" >
+<pre><code>flexibility 
+
+vs. 
+
+performance
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>data.frame: the ultimate type</h3>
+<div class="slideContent" >
+<pre><code class="r">df.data &lt;- data.frame(a=1:5,b=1:5)
+df.data
+</code></pre>
+
+<pre><code>  a b
+1 1 1
+2 2 2
+3 3 3
+4 4 4
+5 5 5
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>Solution : the data.table</h3>
+<div class="slideContent" >
+<pre><code>&quot;contains pre-computed indexes for various columns to accelerate operations like data selection and merges&quot;  
+
+- Wes McKinney
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>faster, better, stronger</h3>
+<div class="slideContent" >
+<pre><code class="r">dt.data &lt;- data.table(a=1:5,b=1:5)
+dt.data
+</code></pre>
+
+<pre><code>   a b
+1: 1 1
+2: 2 2
+3: 3 3
+4: 4 4
+5: 5 5
+</code></pre>
+
+</div>
+
+</section>
+<section data-transition="linear" data-transition-speed="default">
+<h3>dt vs. df</h3>
 <div class="slideContent" >
 <ol>
-<li>Keys</li>
-<li>Fast Grouping</li>
-<li>Fast time series join</li>
+<li>never has rownames
+
+<ul>
+<li>may have one key of one or more columns</li>
+<li>key is used for row indexing instead of rownames</li>
+</ul></li>
+<li>enhanced functionality for &hellip;
+
+<ul>
+<li>fast joins of keyed tables</li>
+<li>fast aggregation</li>
+<li>fast last observation carried forward (LOCF)<br/></li>
+<li>fast columns add/modify/delete, with no copy</li>
+</ul></li>
 </ol>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>data.frame vs. data.table</h3>
+<h3>Use Cases</h3>
 <div class="slideContent" >
-<pre><code class="r"># Making a data.frame from vectors 
-df.data &lt;- data.frame(a=1:5,b=1:5)
+<pre><code>&gt; help(data.table)
 
-# Making a data.table from vectors 
-dt.data &lt;- data.table(a=1:5,b=1:5)
-
-# Making a data.table from a data.frame 
-dt.data &lt;- data.table(df.data)
+&gt; The package can be used just for rapid programming (compact syntax). 
+&gt; Largest compute time benefits are on 64bit platforms with plentiful RAM, or when smaller datasets are repeatedly queried within a loop, or when other methods use so much working memory that they fail with an out of memory error. 
 </code></pre>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Query a Database, Analyze in R</h3>
+<h3>Usage</h3>
 <div class="slideContent" >
-<p>MySQL -&gt; R </p>
+<ol>
+<li>Define keys</li>
+<li>Fast grouping</li>
+<li>Fast time series join</li>
+</ol>
+
+<pre><code class="r">dt &lt;- data.table(df.data)
+</code></pre>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>(d)plyr vs. data.table</h3>
+<h3>summary</h3>
 <div class="slideContent" >
-<p>key info from intro goes here:</p>
-
-<p>setkey(dt.boxscore, date, team)</p>
+<ol>
+<li>better</li>
+<li>faster</li>
+<li>stronger</li>
+</ol>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Further Reading</h3>
+<h3>refs</h3>
 <div class="slideContent" >
-<p><a href="http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf">http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf</a></p>
+<p>[1] <a href="http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf">CRAN Intro Vignette</a><br/>
+[2] <a href="http://blog.yhathq.com/posts/fast-summary-statistics-with-data-dot-table.html">Fast Summary Statistics by yhat</a><br/>
+[3] <a href="http://datatable.r-forge.r-project.org/">r-forge</a></p>
 
-<p><a href="http://blog.yhathq.com/posts/fast-summary-statistics-with-data-dot-table.html">http://blog.yhathq.com/posts/fast-summary-statistics-with-data-dot-table.html</a></p>
+<pre><code class="r">help(data.table)
+
+example(data.table) 
+</code></pre>
 
 </div>
 
